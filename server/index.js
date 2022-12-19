@@ -30,7 +30,8 @@ socketIO.on('connection', (socket) => {
     })
     
     socket.on("joinRoom", data => {
-       console.log(data);
+     
+      console.log(data.room);
 
        const room = {
         roomId: data.room,

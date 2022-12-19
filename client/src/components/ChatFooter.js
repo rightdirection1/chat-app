@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import InputEmoji from "react-input-emoji";
+import { ThemeContext } from "../context/ThemeContext";
 
 const ChatFooter = ({ socket }) => {
   const [message, setMessage] = useState("");
+  const { toggle } = React.useContext(ThemeContext);
+
   const handleTyping = () =>
     socket.emit("typing", `${localStorage.getItem("userName")} is typing`);
 
@@ -29,7 +32,7 @@ const ChatFooter = ({ socket }) => {
     setMessage("");
   };
   return (
-    <div className="chat__footer">
+    <div className="chat__footer" style={toggle ? { background: "black" } : {}}>
       <form className="form" onSubmit={handleSendMessage}>
         
         <InputEmoji

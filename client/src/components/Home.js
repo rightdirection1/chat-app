@@ -14,9 +14,12 @@ const Home = ({socket}) => {
         socket.emit("newUser", {userName,socketID: socket.id});
         
         //Join 
-        socket.emit('joinRoom', {userName, room}) 
-  
-        navigate("/chat")
+        socket.emit('joinRoom', {userName, room}); 
+
+        if(userName && room) {
+          navigate("/chat");
+        }
+        
     }
   return (
     <form className='home__container' onSubmit={handleSubmit}>
@@ -29,6 +32,7 @@ const Home = ({socket}) => {
         className='username__input' 
         value={userName} 
         onChange={e => setUserName(e.target.value)}
+        required
         />
         <label htmlFor="room">Room</label>
         <input type ="text" minLength={6}
@@ -37,6 +41,7 @@ const Home = ({socket}) => {
          className='username__input'
          value={room}
          onChange={e => setRoom(e.target.value)}
+         required
          />
         <button className='home__cta'>SIGN IN</button>
     </form>

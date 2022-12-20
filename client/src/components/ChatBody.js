@@ -2,12 +2,11 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsEmojiSmile } from "react-icons/bs";
 import { ThemeContext } from "../context/ThemeContext";
+import './ChatBody.css';
 
 const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
   const navigate = useNavigate();
-
   const { toggle } = useContext(ThemeContext);
-  console.log(toggle);
 
   const handleLeaveChat = () => {
     localStorage.removeItem("userName");
@@ -16,6 +15,7 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
   };
 
   console.log(messages);
+
   return (
     <>
       <header
@@ -38,6 +38,7 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
               <div className="message__sender" style={toggle? {background: '#C0B83B'}: {}}>
                 <p>{message.time}</p>
                 <p>{message.text}</p>
+                <p><img id="image" src={message.image} /></p>
               </div>
             </div>
           ) : (

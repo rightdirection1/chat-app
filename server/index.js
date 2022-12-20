@@ -32,12 +32,12 @@ socketIO.on('connection', (socket) => {
     socket.on("joinRoom", data => {
      
       console.log(data.room);
-
+       debugger;
        const room = {
         roomId: data.room,
-        users: users
-       };
-    
+        users: users       
+      };
+      
        socketIO.emit("newRoomResponse", room);
     })
  

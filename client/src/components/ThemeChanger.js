@@ -8,7 +8,7 @@ export default function Child() {
   return (
     <div>
       <label>
-        <input type="checkbox" onChange={toggleFunction} />
+        <input className="check-box" type="checkbox" onChange={toggleFunction} />
         <div class="toggle-switch"></div>
       </label>
     </div>

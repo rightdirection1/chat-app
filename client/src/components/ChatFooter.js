@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import InputEmoji from "react-input-emoji";
 import { ThemeContext } from "../context/ThemeContext";
+import './ChatFooter.css';
 
 const ChatFooter = ({ socket }) => {
   const [message, setMessage] = useState("");
   const { toggle } = React.useContext(ThemeContext);
+  const [img, setImg] = useState();
 
   const handleTyping = () =>
     socket.emit("typing", `${localStorage.getItem("userName")} is typing`);
@@ -27,20 +29,35 @@ const ChatFooter = ({ socket }) => {
         id: `${socket.id}${Math.random()}`,
         socketID: socket.id,
         time: getTime(),
+        image: img
       });
     }
     setMessage("");
   };
+
+  const onImageChange = (e) => {
+    const [file] = e.target.files;
+    console.log(file);
+    setImg(URL.createObjectURL(file));
+    console.log(img);
+  };
+
   return (
     <div className="chat__footer" style={toggle ? { background: "black" } : {}}>
       <form className="form" onSubmit={handleSendMessage}>
         
         <InputEmoji
+          id="input"
           value={message}
           onChange={setMessage}
-          cleanOnEnter
+          borderColor="yellow"
           placeholder="Type a message"
+          theme="dark"
         />
+        <div>
+        <label for="myfile">Select a file:</label>
+        <input type="file" id="myfile" onChange={onImageChange} name="myfile"/>
+        </div>
         <button className="sendBtn">SEND</button>
       </form>
     </div>

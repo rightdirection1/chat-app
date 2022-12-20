@@ -2,7 +2,7 @@ div {
     text-align: center;
 }
 
-input {
+.check-box{   
     -webkit-appearance: none;
     position: relative;
     width: 50px;
@@ -14,7 +14,7 @@ input {
     cursor: pointer;
 }
 
-input::after {
+.check-box::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -27,10 +27,10 @@ input::after {
     transition: left .3s;
 }
 
-input:checked {
+.check-box:checked {
     background-color: rgb(141, 221, 141);
 }
 
-input:checked::after {
+.check-box:checked::after {
     left: 70%;
 }

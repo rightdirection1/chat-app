@@ -24,7 +24,7 @@ const ChatBar = ({ socket }) => {
 
   return (
     <div className="chat__sidebar" style={toggle ? { background: "black" } : {}}>
-      <h2 style={toggle ? { color: "white" } : {}}>Open Chat</h2>
+      <h2 style={toggle ? { color: "white" } : {}}>Change Theme</h2>
       <ThemeChanger/>
       <div>
         <h4 className="chat__header" style={toggle ? { color: "white" } : {}}><FiUsers/> ACTIVE USERS</h4>
@@ -35,7 +35,7 @@ const ChatBar = ({ socket }) => {
         </div>
       </div>
       <div>
-            <h4  className='chat__header' style={toggle ? { color: "white" } : {}}>ACTIVE Rooms</h4>
+            <h4  className='chat__header' style={toggle ? { color: "white" } : {}}>ACTIVE ROOMS</h4>
             <div className='chat__users' style={toggle ? { color: "white" } : {}}>
             {rooms.map((room) => (
             <p key={room}>{room}</p>

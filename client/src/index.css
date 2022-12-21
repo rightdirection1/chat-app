@@ -77,12 +77,18 @@
 .leaveChat__btn {
   padding: 10px;
   width: 150px;
+  border-radius: 25px;
   border: none;
   outline: none;
   background-color: #D1512D;
   cursor: pointer;
   color: #EAE3D2;
 }
+
+.leaveChat__btn:hover {
+  background-color: rgb(201, 142, 129);
+}
+
 .message__container {
   width: 100%;
   height: 80vh;
@@ -117,6 +123,7 @@
 .sendBtn {
   width: 150px;
   background-color: green;
+  border-radius: 25px;
   padding: 10px;
   border: none;
   outline: none;

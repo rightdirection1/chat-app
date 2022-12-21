@@ -11,7 +11,7 @@ const Home = ({socket}) => {
         localStorage.setItem("userName", userName)
         localStorage.setItem("room",room);
 
-        socket.emit("newUser", {userName,socketID: socket.id});
+        socket.emit("newUser", {userName, socketID: socket.id});
         
         //Join 
         socket.emit('joinRoom', {userName, room}); 

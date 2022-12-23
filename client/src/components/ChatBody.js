@@ -2,7 +2,9 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsEmojiSmile } from "react-icons/bs";
 import { ThemeContext } from "../context/ThemeContext";
+import {Link} from 'react-router-dom';
 import './ChatBody.css';
+import RecordView from "./ExampleComponent";
 
 const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
   const navigate = useNavigate();
@@ -18,6 +20,7 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
 
   return (
     <>
+     <RecordView/>
       <header
         className="chat__mainHeader"
         style={toggle ? { background: "black" } : {}}
@@ -38,7 +41,12 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
               <div className="message__sender" style={toggle? {background: '#C0B83B'}: {}}>
                 <p>{message.time}</p>
                 <p>{message.text}</p>
-                <p><img id="image" src={message.image} /></p>
+                {
+                  message.files.map(file => (
+                    <a href={file} target="_blank" download><img id="image" src={file} /></a>
+                  ))
+                }
+                
               </div>
             </div>
           ) : (

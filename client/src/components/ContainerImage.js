@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useState } from "react";
+import "./ImageContainer.css";
+import { IoIosClose } from "react-icons/io";
 
-function ContainerImage({image}) {
-    console.log(image);
+function ContainerImage({ files, onClose }) {
   return (
-   
-    <>
-     {image? (<ul style={{background: "#fff", height: "150px"}}>
-         <li><img id="image" alt="" src={image} /></li>
-         <li>Image 2</li>
-      </ul>): <></>}
-      
-    </>
-  )
+    <div className="container-files">
+      {files.length !== 0 ? (
+        files.map((file) => (
+          <div style={{ background: "#fff" }}>
+            <IoIosClose className="icon" onClick={() => onClose(file)} />
+            <img id="image" alt="" src={file.fileURL} />
+          </div>
+        ))
+      ) : (
+        <></>
+      )}
+    </div>
+  );
 }
 
 export default ContainerImage;

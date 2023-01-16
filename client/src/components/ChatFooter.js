@@ -63,7 +63,7 @@ const ChatFooter = ({ socket }) => {
             return;
           }
 
-      blobFiles.push({ fileURL: URL.createObjectURL(file), id: uniqid("id-") });
+      blobFiles.push({ fileURL: URL.createObjectURL(file), id: uniqid("id-") , fileType: file.type, name: file.name });
       setFiles(blobFiles);
       console.log(blobFiles);
     }

@@ -9,5 +9,5 @@ export const fileTypes = [
     "image/tiff",
     "image/webp",
     "image/x-icon",
-    "txt"
+    "text/plain"
   ];

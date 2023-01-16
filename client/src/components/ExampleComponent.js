@@ -13,7 +13,7 @@ const RecordView = () => {
   const [url, setUrl] = useState(mediaBlobUrl);
   const resetRecording = () => {
     console.log("clicked");
-    // setUrl(clearBlobUrl);
+   
     clearBlobUrl();
   };
 

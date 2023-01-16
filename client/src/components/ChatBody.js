@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsEmojiSmile } from "react-icons/bs";
+import {GrDocumentTxt} from "react-icons/gr";
 import { ThemeContext } from "../context/ThemeContext";
-import {Link} from 'react-router-dom';
 import './ChatBody.css';
 import RecordView from "./ExampleComponent";
 
@@ -17,7 +17,7 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
   };
 
   console.log(messages);
-
+  
   return (
     <>
      <RecordView/>
@@ -43,7 +43,9 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
                 <p>{message.text}</p>
                 {
                   message.files.map(file => (
-                    <a href={file} target="_blank" download><img id="image" src={file} /></a>
+                    file.fileType.includes("image")? 
+                   ( <a href={file.fileURL} target="_blank" download={file.name}><img id="image" src={file.fileURL} />{file.name}</a>) :
+                   ( <a href={file.fileURL} target="_blank" download={file.name}><GrDocumentTxt/>{file.name}</a>)
                   ))
                 }
                 

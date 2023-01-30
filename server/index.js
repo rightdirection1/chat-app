@@ -4,6 +4,11 @@ const cors = require("cors");
 bodyParser = require('body-parser');
 mysql = require('mysql');
 const http = require('http').Server(app);
+const PORT = 4000;
+
+app.use(cors());
+app.use(bodyParser.json());
+
 
 //setup database 
 db = mysql.createConnection({
@@ -15,15 +20,15 @@ db = mysql.createConnection({
 
 console.log(db);
 
-const PORT = 4000
+
+
+
 const socketIO = require('socket.io')(http, {
     cors: {
         origin: "http://localhost:3000"
     }
 });
 
-app.use(cors());
-app.use(bodyParser.json());
 
 let users = [];
 let rooms = [];

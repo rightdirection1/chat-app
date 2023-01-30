@@ -1,7 +1,20 @@
-const express = require("express")
-const app = express()
-const cors = require("cors")
+const express = require("express");
+const app = express();
+const cors = require("cors");
+bodyParser = require('body-parser');
+mysql = require('mysql');
 const http = require('http').Server(app);
+
+//setup database 
+db = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'chat'
+})
+
+console.log(db);
+
 const PORT = 4000
 const socketIO = require('socket.io')(http, {
     cors: {
@@ -9,7 +22,9 @@ const socketIO = require('socket.io')(http, {
     }
 });
 
-app.use(cors())
+app.use(cors());
+app.use(bodyParser.json());
+
 let users = [];
 let rooms = [];
 

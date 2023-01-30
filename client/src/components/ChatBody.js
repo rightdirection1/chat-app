@@ -1,14 +1,22 @@
-import { useContext } from "react";
+import {useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsEmojiSmile } from "react-icons/bs";
 import {GrDocumentTxt} from "react-icons/gr";
 import { ThemeContext } from "../context/ThemeContext";
 import './ChatBody.css';
 import RecordView from "./ExampleComponent";
+import ModalPreviewPhoto from "./ModalPreviewPhoto"
 
 const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
   const navigate = useNavigate();
   const { toggle } = useContext(ThemeContext);
+
+   const [img, setImg] = useState({
+     src: "placeholder",
+     alt: 'Upload an Image',
+     isOpenModal: false
+ });
+
 
   const handleLeaveChat = () => {
     localStorage.removeItem("userName");
@@ -16,8 +24,15 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
     window.location.reload();
   };
 
-  console.log(messages);
-  
+  const openModal = (fileURL, name) => {
+    setImg({
+      src: fileURL,
+      alt: name, 
+      isOpenModal: true
+    })
+    console.log(img)
+  }
+
   return (
     <>
      <RecordView/>
@@ -32,7 +47,7 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
           LEAVE CHAT
         </button>
       </header>
-
+     
       <div className="message__container" style={toggle ? { background: "#240B06" } : {}}>
         {messages.map((message) =>
           message.name === localStorage.getItem("userName") ? (
@@ -44,7 +59,7 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
                 {
                   message.files.map(file => (
                     file.fileType.includes("image")? 
-                   ( <a href={file.fileURL} target="_blank" download={file.name}><img id="image" src={file.fileURL} />{file.name}</a>) :
+                   ( <img id="image" alt={file.name} onClick={() => openModal(file.fileURL, file.name)} src={file.fileURL} />) :
                    ( <a href={file.fileURL} target="_blank" download={file.name}><GrDocumentTxt/>{file.name}</a>)
                   ))
                 }
@@ -66,6 +81,8 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
         </div>
         <div ref={lastMessageRef} />
       </div>
+
+      {img.isOpenModal? <ModalPreviewPhoto isOpenedModal={img.isOpenModal} src={img.src} alt={img.alt}/> : null}
     </>
   );
 };

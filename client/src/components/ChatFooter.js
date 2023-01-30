@@ -33,7 +33,6 @@ const ChatFooter = ({ socket }) => {
       time: getTime(),
       files: files,
     };
-    console.log(data);
 
     if (message.trim() && localStorage.getItem("userName")) {
       socket.emit("message", data);
@@ -46,8 +45,8 @@ const ChatFooter = ({ socket }) => {
   };
 
   const onImageChange = (e) => {
-    const maxAllowedSize =200 * 1024 * 1024; // bytes
-    
+    const maxAllowedSize = 200 * 1024 * 1024; // bytes
+
     const selectedFiles = [...e.target.files];
     let blobFiles = [];
 
@@ -56,14 +55,19 @@ const ChatFooter = ({ socket }) => {
         alert("Wrong Format file. Upload the correct one!");
         return;
       }
-  
-         if (file.size > maxAllowedSize) {
-           e.target.value = ''
-           alert("File is too big!")
-            return;
-          }
 
-      blobFiles.push({ fileURL: URL.createObjectURL(file), id: uniqid("id-") , fileType: file.type, name: file.name });
+      if (file.size > maxAllowedSize) {
+        e.target.value = "";
+        alert("File is too big!");
+        return;
+      }
+
+      blobFiles.push({
+        fileURL: URL.createObjectURL(file),
+        id: uniqid("id-"),
+        fileType: file.type,
+        name: file.name,
+      });
       setFiles(blobFiles);
       console.log(blobFiles);
     }
@@ -72,7 +76,7 @@ const ChatFooter = ({ socket }) => {
   };
 
   const onCloseFile = (currentFile) => {
-  setFiles(files.filter((file) => file.id !== currentFile.id));
+    setFiles(files.filter((file) => file.id !== currentFile.id));
   };
 
   return (
@@ -99,6 +103,7 @@ const ChatFooter = ({ socket }) => {
             name="myfile_uploads"
             onChange={onImageChange}
             multiple="multiple"
+            placeholder="Choose a file..."
           />
         </div>
         <button className="sendBtn">SEND</button>

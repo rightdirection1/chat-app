@@ -25,10 +25,12 @@ const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
   };
 
   const openModal = (fileURL, name) => {
+ 
+///
     setImg({
       src: fileURL,
       alt: name, 
-      isOpenModal: true
+      isOpenModal: !isOpenModal
     })
     console.log(img)
   }
